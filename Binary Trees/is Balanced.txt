@@ -1,0 +1,60 @@
+is Balanced
+
+Given a binary tree, check if its balanced i.e. depth of left and right subtrees of every node differ by at max 1. Return true if given binary tree is balanced, false otherwise.
+Input format :
+
+Elements in level order form (separated by space). If any node does not have left or right child, take -1 in its place.
+
+Sample Input 1 :
+5 6 10 2 3 -1 -1 -1 -1 -1 9 -1 -1
+Sample Output 1 :
+false
+Sample Input 2 :
+1 2 3 -1 -1 -1 -1
+Sample Output 2 :
+true
+/********************SOLUTIONS******************/
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+int height(BinaryTreeNode<int> *root) {
+  if(root==NULL)
+        return 0;
+  int ans=height(root->left);
+    
+   int b=height(root->right);
+    if(ans>b)
+      return ans+1;
+    else
+        return b+1;
+}
+bool isBalanced(BinaryTreeNode<int> *root) {
+    if(root==NULL)
+        return 1;
+    int y=height(root->left);
+    int x=height(root->right);
+    if(y-x>1)
+        return 0;
+    if(x-y>1)
+        return 0;
+    else 
+    {
+      bool a=isBalanced(root->left);
+        bool b=isBalanced(root->right);
+        return (a&&b);
+    }
+        
+
+}

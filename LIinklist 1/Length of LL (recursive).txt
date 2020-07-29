@@ -1,0 +1,37 @@
+Length of LL (recursive)
+
+Given a linked list, find and return the length of input LL recursively.
+Input format :
+Linked list elements (separated by space and terminated by -1)
+Output format :
+Length of LL
+Sample Input :
+3 4 5 2 6 1 9 -1
+Sample Output :
+7
+/********************solutions*****************************/
+/**********
+ * Following is the Node class that is already written.
+ 
+class Node{
+public:
+    int data;
+    Node *next;
+    Node(int data){
+        this -> data = data;
+        this -> next = NULL;
+    }
+};
+ 
+*********/
+
+int length(Node *head) {
+    Node *p=head;
+    if(p==NULL)
+        return 0;
+    int ans=length(p->next);
+     return ans+1;
+    
+}
+
+

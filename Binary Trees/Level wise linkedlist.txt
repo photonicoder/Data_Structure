@@ -1,0 +1,73 @@
+Level wise linkedlist
+
+Given a binary tree, write code to create a separate linked list for each level. You need to return the array which contains head of each level linked list.
+Input format :
+
+Elements in level order form (separated by space). If any node does not have left or right child, take -1 in its place.
+
+Output format : Each level linked list is printed in new line (elements separated by space).
+
+Sample Input :
+5 6 10 2 3 -1 -1 -1 -1 -1 9 -1 -1
+Sample Output :
+5 
+6 10 
+2 3 
+9
+SOLUTIONS
+vector<node<int>*> createLLForEachLevel(BinaryTreeNode<int> *root)
+{
+ BinaryTreeNode<int>*f=root;
+    queue<BinaryTreeNode<int>*>q;
+    q.push(f);
+    q.push(NULL);
+    vector<node<int>*>v;
+    int flag=0;
+    node<int>*temp=NULL;
+    int i=0;
+   
+    while(q.size()!=0)
+    {
+        BinaryTreeNode<int>*fr=q.front();
+        q.pop();
+        if(fr!=NULL)
+        {
+            if(flag==0)
+            {
+                flag=1;
+                 node<int>*head=new node<int>(fr->data);
+                 v.push_back(head);
+                temp=head;
+            }
+            if(i>1)
+            {
+             while(temp->next!=NULL)
+                temp=temp->next;
+              node<int>*s1=new node<int>(fr->data);
+             temp->next=s1;
+            }
+            if(fr->left!=NULL)
+            {
+                q.push(fr->left);
+            }
+             if(fr->right!=NULL)
+            {
+                q.push(fr->right);
+            }
+        }
+        else
+        {
+            flag=0;
+            i=0;
+            if(q.size()==0)
+                break;
+            else
+            q.push(NULL);
+            
+        }
+           i++;
+}
+    return v;
+}
+
+

@@ -1,0 +1,68 @@
+Next larger
+
+Given a generic tree and an integer n. Find and return the node with next larger element in the Tree i.e. find a node with value just greater than n.
+Return NULL if no node is present with the value greater than n.
+Input Format :
+Line 1 : Integer n
+Line 2 : Elements in level order form separated by space (as per done in class). Order is - 
+Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element 
+Output Format :
+Node with value just greater than n.
+Sample Input 1 :
+18
+10 3 20 30 40 2 40 50 0 0 0 0 
+Sample Output 1 :
+20
+Sample Input 2 :
+21
+10 3 20 30 40 2 40 50 0 0 0 0 
+Sample Output 2:
+30
+/*************SOLUTIONS*******************/
+
+#include <queue>
+#include <vector>
+TreeNode<int>* min( vector <TreeNode<int>*>v)
+{
+    TreeNode<int>*x=v.at(0);
+    int min=x->data;
+        int i=1;
+        while(i<v.size())
+        {
+           TreeNode<int>*y=v.at(i);
+          int m=y->data;  
+            if(m<min)
+            {
+                x=y;
+                min =m;
+            }
+            i++;
+
+        }
+    return x;
+}
+TreeNode<int>*nextLargerElement(TreeNode<int> *root, int n) {
+  TreeNode<int> *x=root;
+    queue <TreeNode<int>*> q;
+    vector <TreeNode<int>*>v;
+    q.push(x);
+    int i=0;
+    while(q.size()!=0)
+    {
+        TreeNode<int>*frnt=q.front();
+        q.pop();
+        int y=frnt->data;
+        if(y>n)
+        {
+          v.push_back(frnt);
+            
+        }
+        for(int i=0;i<frnt->children.size();i++)
+        {
+            q.push(frnt->children.at(i));
+        }
+    }
+    TreeNode<int> *f=min(v);
+    return f;
+}	
+

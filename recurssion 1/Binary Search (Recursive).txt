@@ -1,0 +1,41 @@
+Binary Search (Recursive)
+
+Given an integer sorted array (sorted in increasing order) and an element x, find the x in given array using binary search. Return the index of x.
+Return -1 if x is not present in the given array.
+Note : If given array size is even, take first mid.
+Input format :
+
+Line 1 : Array size
+
+Line 2 : Array elements (separated by space)
+
+Line 3 : x (element to be searched)
+
+Sample Input :
+6
+2 3 4 5 6 8 
+5 
+Sample Output:
+3 
+/**************************SOLUTIONS***********************************************/
+int binarySearchs(int input[], int s_index,int e_index, int element)
+{
+  if(s_index<=e_index)
+  {
+      int mid=(e_index+s_index)/2;
+      if(input[mid]==element)
+          return mid;
+      else if(input[mid]>element)
+          return binarySearchs(input,s_index,mid-1,element);
+      else
+           return binarySearchs(input,mid+1,e_index,element);
+  }
+else return -1;
+}
+
+int binarySearch(int input[], int size, int element)
+{ 
+    return binarySearchs(input,0,size-1,element);
+    
+
+}

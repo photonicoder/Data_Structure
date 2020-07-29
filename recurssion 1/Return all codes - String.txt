@@ -1,0 +1,56 @@
+Return all codes - String
+
+Assume that the value of a = 1, b = 2, c = 3, ... , z = 26. You are given a numeric string S. Write a program to return the list of all possible codes that can be generated from the given string.
+Note : The order of codes are not important. And input string does not contain 0s.
+Input format :
+A numeric string
+Constraints :
+1 <= Length of String S <= 10
+Sample Input:
+1123
+Sample Output:
+aabc
+kbc
+alc
+aaw
+kw
+/***************************************************SOLUTIONS*************************************************************/
+#include <string.h>
+using namespace std;
+
+int getCodes(string input, string output[10000]) {
+    
+    if(input.size()==0){
+        output[0] = "";
+        return 1;
+    }
+  
+    string op1[10000],op2[10000];
+    string r= input.substr(1);
+    int ans=getCodes(r,op1);
+    
+    int i=input[0]-'0';
+        char ch='a'+i-1;
+        for(int j=0;j<ans;j++)
+        {
+            output[j]+=ch+op1[j];
+        }
+    if(input.size()>1){
+    i = i*10 + (input[1]-'0');
+    //cout<<i<<endl;
+    if(i>=10&&i<=26)
+    {
+        ch='a'+i-1;
+        string p=input.substr(2);
+        int ans2=getCodes(p,op2);
+    for(int j=0;j<ans2;j++)
+    {    
+        output[ans+j]+=ch+op2[j];
+    }
+        return ans+ans2;
+    }
+    }
+    return ans;
+    
+}
+

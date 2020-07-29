@@ -1,0 +1,61 @@
+Pair star
+
+Given a string S, compute recursively a new string where identical chars that are adjacent in the original string are separated from each other by a "*".
+Input format :
+String S
+Output format :
+Modified string
+Constraints :
+0 <= |S| <= 1000
+where |S| represents length of string S.
+Sample Input 1 :
+hello
+Sample Output 1:
+hel*lo
+Sample Input 2 :
+aaaa
+Sample Output 2 :
+a*a*a*a
+/***************************SOLUTIONS********************************/
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+void star(char ch[],int n)
+{
+    int temp=ch[n+1];
+    ch[n+1]='*';
+    int t=strlen(ch);
+    int i=n+2;
+    while(i<t+1)
+    {
+        int temp2=ch[i];
+        ch[i]=temp;
+        temp=temp2;
+        i++;
+    }
+    ch[i]='\0';
+}
+void helper(char ch[],int n)
+{
+    if(n>=0)
+    {
+        helper(ch,n-1);
+        if(ch[n]==ch[n+1])
+        {
+            star(ch,n);
+        }
+    }
+}
+void pairStar(char ch[])
+{
+   
+    int n=strlen(ch);
+    int j=0;
+    for(int i=0;ch[i]!='\0';i++)
+        if(ch[i]==ch[i+1])
+            j++;
+            n=n+j;
+    helper(ch,n);
+}
+

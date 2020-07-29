@@ -1,0 +1,37 @@
+Print Permutations - String
+
+Given a string, find and print all the possible permutations of the input string.
+Note : The order of permutations are not important. Just print them in different lines.
+Sample Input :
+abc
+Sample Output :
+abc
+acb
+bac
+bca
+cab
+cba
+/******************************************************** SOLUTION ******************************************************************/
+#include <iostream>
+#include <string>
+using namespace std;
+void helper(string i,string o)
+{
+    if(i.length()==0)
+    {
+        cout<<o<<endl;
+        return;
+    }
+    
+for(int j=0;j<=o.length();j++)   
+{ 
+    helper(i.substr(1),o.substr(0,j)+i[0]+o.substr(j));
+}
+}
+    
+
+
+void printPermutations(string input){
+    helper(input,"");
+    return ;
+}

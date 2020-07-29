@@ -1,0 +1,117 @@
+Quick Sort Code
+
+Sort an array A using Quick Sort.
+Change in the input array itself. So no need to return or print anything.
+
+
+Input format :
+Line 1 : Integer n i.e. Array size
+Line 2 : Array elements (separated by space)
+Output format :
+Array elements in increasing order (separated by space)
+Constraints :
+1 <= n <= 10^3
+Sample Input 1 :
+6 
+2 6 8 5 4 3
+Sample Output 1 :
+2 3 4 5 6 8
+Sample Input 2 :
+5
+1 5 2 7 3
+Sample Output 2 :
+1 2 3 5 7 
+/***********************************SOLUTIONS************************************/
+
+#include <iostream>
+using namespace std; 
+int partitionArray(int input[], int start, int end) { 
+    // Chose pivot
+    int pivot = input[start];
+    // Count elements smaller than pivot and swap
+    int count = 0;
+    for(int i = start+1; i <= end; i++) {
+        if(input[i] <= pivot) {
+            count++;
+        }
+    }
+    int pivotIndex = start + count;
+    int temp = input[start]; 
+    input[start] = input[pivotIndex];
+    input[pivotIndex] = temp;
+    // ensure left half contains elements smaller than pivot 
+    // and right half larger 
+    int i = start, j = end;
+    while(i <= pivotIndex && j >= pivotIndex) {
+        while(input[i] <= pivot) {
+            i++;
+        }
+        while(input[j] > pivot) {
+            j--;
+        }
+        if(i < pivotIndex && j > pivotIndex) {
+            int temp = input[i];
+            input[i] = input[j];
+            input[j] = temp;
+            i++;
+            j--;
+        }
+    }
+    return pivotIndex;
+}
+void quickSort(int input[], int start, int end) {
+    if(start >= end) {
+        return;
+    }
+    int pivotIndex = partitionArray(input, start, end);
+    quickSort(input, start, pivotIndex-1);
+    quickSort(input, pivotIndex+1, end);
+} 
+void quickSort(int input[], int n) {
+    quickSort(input, 0, n - 1);
+}
+/*
+void quicksorts(int input[],int low,int high);
+int partitions(int input[],int low,int high)
+{
+    int i,j;
+    i=low;
+    j=high+1;
+    int p=input[low];
+   do
+    {
+        do
+        {
+            i++;
+        }while(input[i]<=p);
+        do
+        {
+            j--;
+        }while(input[j]>p);
+        if(i<j)
+        {
+            int temp=input[i];
+            input[i]=input[j];
+            input[j]=temp;
+        }
+    } while(i<=j);
+
+int temp=input[j];
+    input[j]=input[low];
+    input[low]=temp;
+    return j;
+}
+void quicksorts(int input[],int low,int high)
+{
+    if(low<high)
+    {
+      int j=partitions(input,low,high);
+        quicksorts(input ,low,j-1);
+         quicksorts(input ,j+1,high);
+    }
+}
+void quickSort(int input[], int size) {
+ int low=0;
+    quicksorts(input,low,size-1);
+}
+*/

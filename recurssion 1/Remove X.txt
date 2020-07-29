@@ -1,0 +1,63 @@
+Remove X
+
+Given a string, compute recursively a new string where all 'x' chars have been removed.
+Input format :
+String S
+Output format :
+Modified String
+Constraints :
+1 <= |S| <= 10^3
+where |S| represents the length of string S. 
+Sample Input 1 :
+xaxb
+Sample Output 1:
+ab
+Sample Input 2 :
+abc
+Sample Output 2:
+abc
+Sample Input 3 :
+xx
+Sample Output 3:
+/******************************SOLUTIONS*************************/
+#include <iostream>
+#include <string.h>
+using namespace std;
+void xt(char ch[],int n);
+void removet(char ch[],int n)
+{
+    int i;
+    i=n;
+    while(ch[i]!='\0')
+    {   int j=i;
+    if(ch[i]=='x')
+    {
+    while(ch[j]!='\0')
+    {
+        ch[j]=ch[j+1];
+
+        j++;
+    }
+    ch[j-1]='\0';
+    }
+    if(ch[i]=='x')
+            continue;
+            i++;
+}
+}
+void removeX(char ch[])
+{
+    int n=strlen(ch);
+    xt(ch,n);
+}
+void xt(char ch[],int n)
+{
+if(n>=0)
+{
+    xt(ch,n-1);
+    if(ch[n]=='x')
+    {
+        removet(ch,n);
+    }
+}
+}

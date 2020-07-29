@@ -1,0 +1,40 @@
+Check Palindrome (recursive)
+
+Check whether a given String S is a palindrome using recursion. Return true or false.
+Input Format :
+String S
+Output Format :
+'true' or 'false'
+Constraints :
+0 <= |S| <= 1000
+where |S| represents length of string S.
+Sample Input 1 :
+racecar
+Sample Output 1:
+true
+Sample Input 2 :
+ninja
+Sample Output 2:
+false
+/***********************SOLUTIONS*********************/
+#include<string.h>
+#include<ctype.h>
+bool palindrome(int i,char ch[],int n);
+bool checkPalindrome(char input[]) {
+    int n=strlen(input);
+    int i=0;
+ 
+    bool k=palindrome(i,input ,n-1);
+   return k;
+}
+bool palindrome(int i,char ch[],int n)
+{ 
+    if(i>=n)
+         return true;
+    if(ch[i]!=ch[n])
+        return false;
+    else palindrome(i+1,ch,n-1);
+
+}
+
+

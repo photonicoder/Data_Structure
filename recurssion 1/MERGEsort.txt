@@ -1,0 +1,57 @@
+Merge Sort Code
+Sort an array A using Merge Sort.
+Change in the input array itself. So no need to return or print anything.
+Input format :
+Line 1 : Integer n i.e. Array size
+Line 2 : Array elements (separated by space)
+Output format :
+Array elements in increasing order (separated by space)
+Constraints :
+1 <= n <= 10^3
+Sample Input 1 :
+6 
+2 6 8 5 4 3
+Sample Output 1 :
+2 3 4 5 6 8
+Sample Input 2 :
+5
+2 1 5 2 3
+Sample Output 2 :
+1 2 2 3 5 
+/*****************************SOLUTIONS*****************************/
+void fnMerge(int a[], int low,int mid,int high)
+{
+    int i,k,j,b[500000];
+    i=k=low;
+    j=mid+1;
+    while(i<=mid && j<=high)
+{
+    if(a[i]<a[j])
+    b[k++]=a[i++];
+else
+    b[k++]=a[j++];
+}
+    while(i<=mid)
+    b[k++]=a[i++];
+    while(j<=high)
+        b[k++]=a[j++];
+        for(i=low;i<k;i++)
+            a[i]=b[i];
+}
+
+void mergesortS(int arr[],int l ,int n)
+{
+    
+      if(l<n)
+      {
+    int mid=(l+n)/2;
+    mergesortS(arr,l,mid);
+    mergesortS(arr,mid+1,n);
+    fnMerge(arr,l,mid,n);
+      }
+}
+void mergeSort(int input[],int size){
+
+    mergesortS(input,0,size-1);
+        
+}
